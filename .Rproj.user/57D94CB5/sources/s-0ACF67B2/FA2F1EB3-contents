@@ -1,0 +1,133 @@
+---
+title: "SARI Nadzor u Crnoj Gori sezona 2021-2022"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+library(DT)
+library(ggplot2)
+library("readxl")
+```
+
+SARI Agregirani podaci
+=======================================================================
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+
+```{r}
+my_data <- read_excel("SARIMNE1.xlsx")
+selectInput('xcol', 'Ustanova', c("OB BERANE", "OB BREZOVIK",
+"IBD",
+"Interno",
+"Infektivno",
+"MNE"))
+    
+selectInput('ycol', 'Y Promjenjiva', names(my_data),
+                selected=names(my_data)[[4]])
+    
+numericInput('clusters', 'Nedelja', "sve",
+              min = 1, max = 53)
+
+ 
+    
+```
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+
+# my_data <- read_excel("SARIMNE1.xlsx")
+# 
+# reactive(print(input$xcol))
+ reactiveY <- reactive(input$ycol)
+renderPlot({
+  
+my_data <- read_excel("SARIMNE1.xlsx")
+    
+  ggplot(my_data, aes( y=(my_data)[[reactiveY()]],
+                    x=(my_data)[[3]])) + 
+    geom_bar(position="dodge", stat="identity")
+  })
+
+  
+ 
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+ggplot(my_data, aes( y=(my_data)[[4]],
+                    x=(my_data)[[3]])) + 
+    geom_bar(position="dodge", stat="identity")
+
+```
+
+### Chart C
+
+```{r}
+ggplot(my_data, aes( y=(my_data)[[5]],
+                    x=(my_data)[[3]])) + 
+    geom_bar(position="dodge", stat="identity")
+
+```
+
+
+Tabela sa svim podacima
+=======================================================================
+
+
+### Tabela
+
+```{r}
+my_data <- read_excel("SARIMNE1.xlsx")
+renderDataTable({
+  datatable(my_data, colnames = c("Rb","Ustanova", "Nedelja", "Uzrasne grupe",  "Ukupan broj hospitalizovanih pacijenata u bolnici tokom sedmice"))
+  
+
+  # %>% formatStyle(
+  #   'Sepal.Width',
+  #   backgroundColor = styleInterval(3.4, c('gray', 'yellow'))
+  # )
+})
+
+```
+
+
+About
+=======================================================================
+
+**The  SARI  MNE  Dashboard**
+
+
+**Data**
+
+The input data for this dashboard are the [covis19italy](https://github.com/RamiKrispin/covid19italy) and [coronavirus](https://github.com/RamiKrispin/coronavirus) R packages (dev version). The data and dashboard are refreshed on a daily bases. 
+
+**Data source**
+
+The raw data for the covid19italy package is pulled from Italy Department of Civil Protection, and the coronavirus package from Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE)
+
+**Packages**
+
+* D
+
+
+**Deployment and reproducibly**
+
+The dashboard was deployed to Github docs. If you wish to deploy and/or modify the dashboard on your Github account, you can apply the following steps:
+
+
+
