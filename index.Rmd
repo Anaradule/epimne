@@ -20,7 +20,6 @@ SARI Agregirani podaci
 
 Column {.sidebar}
 -----------------------------------------------------------------------
-
 ```{r}
 my_data <- read_excel("SARIMNE1.xlsx")
 selectInput('xcol', 'Ustanova', c("OB BERANE", "OB BREZOVIK",
