@@ -1,6 +1,0 @@
-"0","my_data <- read_excel(""SARIMNE1.xlsx"")"
-"0","selectInput('xcol', 'Ustanova', c(""OB BERANE"", ""OB BREZOVIK"","
-"0","""IBD"","
-"0","""Interno"","
-"0","""Infektivno"","
-"0","""MNE""))"

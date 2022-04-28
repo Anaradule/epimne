@@ -1,3 +1,0 @@
-"0","    "
-"0","selectInput('ycol', 'Y Promjenjiva', names(my_data),"
-"0","                selected=names(my_data)[[4]])"

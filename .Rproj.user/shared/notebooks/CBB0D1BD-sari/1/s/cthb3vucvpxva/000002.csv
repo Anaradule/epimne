@@ -1,4 +1,0 @@
-"0","ggplot(my_data, aes( y=(my_data)[[5]],"
-"0","                    x=(my_data)[[3]])) + "
-"0","    geom_bar(position=""dodge"", stat=""identity"")"
-"0",""
